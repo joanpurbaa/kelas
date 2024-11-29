@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/k.ico" sizes="any" />
+      <link rel="icon" href="/icon.png" sizes="any" />
       <body
         suppressHydrationWarning={true}
         className={`${inter.className} antialiased`}
