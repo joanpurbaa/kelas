@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Header from "../_components/Header";
 import FormField from "../_components/FormField";
+import Image from "next/image";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -42,6 +43,31 @@ const Login = () => {
             <Button type="submit" className="w-full">
               Masuk
             </Button>
+          </li>
+          <li className="flex items-center gap-x-3">
+            <div className="w-full h-0.5 bg-gray-300 rounded-md"></div>
+            <p className="text-zinc-800">atau</p>
+            <div className="w-full h-0.5 bg-gray-300 rounded-md"></div>
+          </li>
+          <li className="flex gap-x-3">
+            <div className="w-full flex justify-center border rounded-md p-1 py-1.5">
+              <Image
+                src="/googleIcon.svg"
+                width={30}
+                height={30}
+                alt="Google logo's"
+              />
+            </div>
+            <div className="w-full flex justify-center border rounded-md p-1 py-1.5">
+              <Image
+                src="/githubLogo.svg"
+                width={30}
+                height={30}
+                alt="Google logo's"
+              />
+            </div>
+          </li>
+          <li>
             <p className="mt-3">
               Belum punya akun?{" "}
               <Link className="text-sky-500 underline" href="/daftar">
