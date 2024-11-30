@@ -61,7 +61,7 @@ const AppSidebar = () => {
                 Beranda
               </SidebarMenuButton>
               <SidebarMenuItem>
-                <Collapsible className="group/collapsible">
+                <Collapsible defaultOpen className="group/collapsible">
                   <CollapsibleTrigger asChild>
                     <SidebarMenuButton>
                       <Book />
