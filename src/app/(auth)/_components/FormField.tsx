@@ -10,8 +10,15 @@ type FormFieldProps = {
 const FormField = ({ id, label, placeholder, onChange }: FormFieldProps) => {
   return (
     <>
-      <label htmlFor={id}>{label}</label>
-      <Input onChange={onChange} id={id} placeholder={placeholder} />
+      <label className="text-xs md:text-base" htmlFor={id}>
+        {label}
+      </label>
+      <Input
+        className="text-xs md:text-base"
+        onChange={onChange}
+        id={id}
+        placeholder={placeholder}
+      />
     </>
   );
 };

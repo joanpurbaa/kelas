@@ -40,13 +40,13 @@ const Register = () => {
             />
           </li>
           <li>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full text-xs md:text-base">
               Buat akun
             </Button>
           </li>
           <LoginWith />
           <li>
-            <p className="mt-3">
+            <p className="mt-3 text-xs md:text-base">
               Sudah punya akun?{" "}
               <Link className="text-sky-500 underline" href="/masuk">
                 Masuk
