@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Header from "../_components/Header";
 import FormField from "../_components/FormField";
+import LoginWith from "../_components/LoginWith";
 
 const Register = () => {
   const [email, setEmail] = useState<string>("");
@@ -42,6 +43,9 @@ const Register = () => {
             <Button type="submit" className="w-full">
               Buat akun
             </Button>
+          </li>
+          <LoginWith />
+          <li>
             <p className="mt-3">
               Sudah punya akun?{" "}
               <Link className="text-sky-500 underline" href="/masuk">
