@@ -73,20 +73,26 @@ const SubjectsMenu = () => {
       {subjects.map((subject) => (
         <Link
           href="#"
-          className="col-span-4 h-[250px] shadow-md hover:shadow-2xl rounded-lg"
+          className="col-span-12 sm:col-start-4 sm:col-span-7 md:col-span-6 lg:col-span-4 shadow-md hover:shadow-2xl rounded-lg"
           key={subject.id}
         >
           <div
-            className={`flex items-end ${subject.background} bg-cover bg-center w-full h-[60%] rounded-t-lg p-3`}
+            className={`flex items-end ${subject.background} bg-cover bg-center w-full h-[100px] md:h-[70px] lg:h-[80px] xl:h-[120px] 2xl:h-[150px] rounded-t-lg p-3`}
           >
-            <h1 className="text-white text-2xl font-semibold">{subject.subject}</h1>
+            <h1 className="text-white text-md 2xl:text-xl font-semibold">
+              {subject.subject}
+            </h1>
           </div>
-          <div className="h-[40%] flex flex-col justify-between p-3">
-            <p className="text-zinc-800 italic font-semibold">- {subject.guru}</p>
+          <div className="h-auto flex flex-col justify-between p-3">
+            <p className="text-zinc-800 italic text-xs sm:text-sm xl:text-base font-semibold">
+              - {subject.guru}
+            </p>
             <div className="flex justify-end">
-              <div className="flex gap-x-1 bg-zinc-600 rounded-md p-2">
-                <User className="text-white" />
-                <p className="text-white">{subject.jumlahMurid}</p>
+              <div className="flex items-center gap-x-1 bg-zinc-600 rounded-md p-1 lg:p-2">
+                <User className="text-white w-4 h-4 sm:w-5 sm:h-5 xl:w-6 xl:h-6" />
+                <p className="text-white text-xs sm:text-sm xl:text-base">
+                  {subject.jumlahMurid}
+                </p>
               </div>
             </div>
           </div>
