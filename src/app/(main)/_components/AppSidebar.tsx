@@ -24,14 +24,14 @@ import {
   SidebarMenuItem,
   SidebarMenuBadge,
   SidebarGroupContent,
-} from "@/components/ui/sidebar";
+} from "@/app/components/ui/sidebar";
 
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from "@/components/ui/dropdown-menu";
+} from "@/app/components/ui/dropdown-menu";
 import {
   Collapsible,
   CollapsibleContent,

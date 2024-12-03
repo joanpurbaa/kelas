@@ -1,46 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Button } from "@/app/components/ui/button";
 import Header from "../_components/Header";
 import FormField from "../_components/FormField";
 import LoginWith from "../_components/LoginWith";
+import { useState } from "react";
+import { useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { daftar } from "@/app/actions/auth";
 
 const Register = () => {
-  const [email, setEmail] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const [state, action] = useActionState(daftar, undefined);
+  const { pending } = useFormStatus();
 
-  const formHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-    console.log(email);
-    console.log(username);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       <Header />
-      <form onSubmit={formHandler} className="w-80 mt-7" action="">
+      <form className="w-80 mt-7" action={action}>
         <ul className="space-y-5">
           <li>
             <FormField
               id="email"
               label="Email"
+              value={formData.email}
+              onChange={handleInputChange}
               placeholder="Masukkan Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
+              />
+            {state?.error?.email && (
+              <p className="mt-1 text-red-500 italic">{state.error.email}</p>
+            )}
           </li>
           <li>
             <FormField
-              id="username"
-              label="Username"
-              placeholder="Masukkan Username"
-              onChange={(e) => setUsername(e.target.value)}
+              id="password"
+              label="Password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Masukkan Password"
             />
+            {state?.error?.password && (
+              <p className="mt-1 text-red-500 italic">{state.error.password}</p>
+            )}
           </li>
           <li>
-            <Button type="submit" className="w-full text-xs md:text-base">
+            <Button
+              disabled={pending}
+              type="submit"
+              className="w-full text-xs md:text-base"
+            >
               Buat akun
             </Button>
           </li>
