@@ -21,6 +21,7 @@ const FormField = ({ id, label, placeholder, value, onChange }: FormFieldProps) 
         name={id}
         value={value}
         placeholder={placeholder}
+        required
       />
     </>
   );

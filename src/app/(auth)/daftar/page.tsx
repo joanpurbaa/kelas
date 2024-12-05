@@ -1,18 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/app/components/ui/button";
 import Header from "../_components/Header";
 import FormField from "../_components/FormField";
-import LoginWith from "../_components/LoginWith";
+import FormButton from "../_components/FormButton";
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
 import { useActionState } from "react";
 import { daftar } from "@/app/actions/auth";
 
-const Register = () => {
-  const [state, action] = useActionState(daftar, undefined);
-  const { pending } = useFormStatus();
+const Daftar = () => {
+  const [state, action] = useActionState(daftar, null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -40,10 +37,13 @@ const Register = () => {
               value={formData.email}
               onChange={handleInputChange}
               placeholder="Masukkan Email"
-              />
+            />
             {state?.error?.email && (
-              <p className="mt-1 text-red-500 italic">{state.error.email}</p>
+              <p className="mt-1 text-red-500">{state.error.email}</p>
             )}
+            {state?.message ? (
+              <p className="mt-1 text-red-500">{state.message}</p>
+            ) : null}
           </li>
           <li>
             <FormField
@@ -54,19 +54,12 @@ const Register = () => {
               placeholder="Masukkan Password"
             />
             {state?.error?.password && (
-              <p className="mt-1 text-red-500 italic">{state.error.password}</p>
+              <p className="mt-1 text-red-500">{state.error.password}</p>
             )}
           </li>
           <li>
-            <Button
-              disabled={pending}
-              type="submit"
-              className="w-full text-xs md:text-base"
-            >
-              Buat akun
-            </Button>
+            <FormButton value="Buat akun" />
           </li>
-          <LoginWith />
           <li>
             <p className="mt-3 text-xs md:text-base">
               Sudah punya akun?{" "}
@@ -81,4 +74,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Daftar;

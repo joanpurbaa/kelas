@@ -12,7 +12,7 @@ export const FormDaftarSchema = z.object({
           type: "string",
           minimum: 8,
           inclusive: true,
-          message: "Minimal 8 karakter.",
+          message: "Minimal 8 karakter",
         });
       } else if (!/[a-bA-B]/.test(value)) {
         ctx.addIssue({
@@ -31,6 +31,11 @@ export const FormDaftarSchema = z.object({
         });
       }
     }),
+});
+
+export const FormMasukSchema = z.object({
+  email: z.string().email({ message: "Email tidak valid" }).trim(),
+  password: z.string({ required_error: "Password wajib diisi" }).trim(),
 });
 
 export type FormState =
