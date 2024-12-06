@@ -2,9 +2,10 @@
 
 import { FormDaftarSchema, FormMasukSchema } from "@/app/lib/zod";
 import { prisma } from "@/app/lib/prisma";
-import { hashSync, compareSync } from "bcrypt-ts";
+import { hashSync } from "bcrypt-ts";
 import { redirect } from "next/navigation";
-// import { signIn } from "../../../../auth";
+import { signIn } from "../../../auth";
+import { AuthError } from "next-auth";
 
 export const daftar = async (prevState: unknown, formData: FormData) => {
   try {
@@ -36,34 +37,36 @@ export const daftar = async (prevState: unknown, formData: FormData) => {
 };
 
 export const masuk = async (prevState: unknown, formData: FormData) => {
-  try {
-    const validatedFields = FormMasukSchema.safeParse({
-      email: formData.get("email"),
-      password: formData.get("password"),
-    });
+  const validatedFields = FormMasukSchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
 
-    if (!validatedFields.success) {
-      return {
-        error: validatedFields.error.flatten().fieldErrors,
-      };
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email, password } = validatedFields.data;
+
+  try {
+    await signIn("credentials", { email, password, redirectTo: "/" });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { message: "Email atau password salah" };
+        default:
+          return { message: "Ada yang salah" };
+      }
     }
 
-    const { email, password } = validatedFields.data;
-
-    const validatedEmail = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-
-    if (!validatedEmail) throw "Email tidak ditemukan";
-
-    const comparePassword = compareSync(password, validatedEmail.password);
-
-    if (!comparePassword) throw "Password tidak cocok";
-  } catch (error) {
-    return { message: error };
+    throw error;
   }
 
   redirect("/");
+};
+
+export const loginByGoogle = async () => {
+  await signIn("google");
 };

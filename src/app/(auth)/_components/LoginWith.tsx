@@ -1,3 +1,4 @@
+import { loginByGoogle } from "@/app/actions/auth";
 import Image from "next/image";
 
 const LoginWith = () => {
@@ -10,6 +11,7 @@ const LoginWith = () => {
       </li>
       <div className="flex gap-x-3">
         <button
+          onClick={loginByGoogle}
           type="submit"
           className="w-full flex justify-center border rounded-md p-1 py-1.5"
         >

@@ -36,7 +36,7 @@ const Masuk = () => {
             <li className="bg-red-100 flex justify-center text-red-500 border border-red-300 p-3 rounded-md">
               <div className="flex items-center gap-x-3">
                 <CircleX />
-                <p className="text-red-500">{state?.message}</p>
+                <p className="text-red-500">{state.message}</p>
               </div>
             </li>
           ) : null}
