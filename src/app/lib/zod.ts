@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const FormDaftarSchema = z.object({
+  username: z.string(),
   email: z.string().email({ message: "Email tidak valid" }).trim(),
   password: z
     .string({ required_error: "Password wajib diisi" })
@@ -41,6 +42,7 @@ export const FormMasukSchema = z.object({
 export type FormState =
   | {
       error?: {
+        username?: string[];
         email?: string[];
         password?: string[];
       };

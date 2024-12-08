@@ -12,6 +12,7 @@ const Daftar = () => {
   const [state, action] = useActionState(daftar, null);
 
   const [formData, setFormData] = useState({
+    username: "",
     email: "",
     password: "",
   });
@@ -30,6 +31,18 @@ const Daftar = () => {
       <Header />
       <form className="w-80 mt-7" action={action}>
         <ul className="space-y-5">
+          <li>
+            <FormField
+              id="username"
+              label="Username"
+              value={formData.username}
+              onChange={handleInputChange}
+              placeholder="Masukkan Username"
+            />
+            {state?.error?.username && (
+              <p className="mt-1 text-red-500">{state.error.username}</p>
+            )}
+          </li>
           <li>
             <FormField
               id="email"

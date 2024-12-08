@@ -9,10 +9,9 @@ import { AuthError } from "next-auth";
 
 export const daftar = async (prevState: unknown, formData: FormData) => {
   try {
-    const validatedFields = FormDaftarSchema.safeParse({
-      email: formData.get("email"),
-      password: formData.get("password"),
-    });
+    const validatedFields = FormDaftarSchema.safeParse(
+      Object.fromEntries(formData.entries())
+    );
 
     if (!validatedFields.success) {
       return {
@@ -20,11 +19,12 @@ export const daftar = async (prevState: unknown, formData: FormData) => {
       };
     }
 
-    const { email, password } = validatedFields.data;
+    const { username, email, password } = validatedFields.data;
     const hashedPassword = hashSync(password, 10);
 
     await prisma.user.create({
       data: {
+        name : username,
         email,
         password: hashedPassword,
       },

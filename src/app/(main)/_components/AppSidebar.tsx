@@ -37,8 +37,16 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
+import { signOut, auth } from "../../../../auth";
+import { redirect } from "next/navigation";
 
-const AppSidebar = () => {
+const AppSidebar = async () => {
+  const session = await auth();
+
+  if (!session) {
+    redirect("/masuk");
+  }
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -96,7 +104,7 @@ const AppSidebar = () => {
               <SidebarMenuButton>
                 <div className="flex items-center gap-x-1">
                   <UserCircle />
-                  <p>Jhon doe</p>
+                  <p>{session?.user?.name}</p>
                 </div>
                 <ChevronUp className="ml-auto" />
               </SidebarMenuButton>
@@ -109,10 +117,19 @@ const AppSidebar = () => {
                 <User />
                 <span>Akun</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LogOut />
-                <span>Sign out</span>
-              </DropdownMenuItem>
+              <form
+                action={async () => {
+                  "use server";
+                  await signOut();
+                }}
+              >
+                <button type="submit">
+                  <DropdownMenuItem>
+                    <LogOut />
+                    <span>Sign out</span>
+                  </DropdownMenuItem>
+                </button>
+              </form>
             </DropdownMenuContent>
           </DropdownMenu>
         </SidebarMenu>
