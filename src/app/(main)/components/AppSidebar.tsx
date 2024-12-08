@@ -40,12 +40,12 @@ import {
 import { signOut, auth } from "../../../../auth";
 import { redirect } from "next/navigation";
 
-const AppSidebar = async () => {
-  const session = await auth();
+const AppSidebar = () => {
+  // const session = await auth();
 
-  if (!session) {
-    redirect("/masuk");
-  }
+  // if (!session) {
+  //   redirect("/masuk");
+  // }
 
   return (
     <Sidebar>
@@ -104,7 +104,7 @@ const AppSidebar = async () => {
               <SidebarMenuButton>
                 <div className="flex items-center gap-x-1">
                   <UserCircle />
-                  <p>{session?.user?.name}</p>
+                  {/* <p>{session?.user?.name}</p> */}
                 </div>
                 <ChevronUp className="ml-auto" />
               </SidebarMenuButton>
@@ -118,10 +118,9 @@ const AppSidebar = async () => {
                 <span>Akun</span>
               </DropdownMenuItem>
               <form
-                action={async () => {
-                  "use server";
-                  await signOut();
-                }}
+                // action={async () => {
+                //   await signOut();
+                // }}
               >
                 <button type="submit">
                   <DropdownMenuItem>

@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Header from "../_components/Header";
-import FormField from "../_components/FormField";
-import FormButton from "../_components/FormButton";
+import Header from "../components/Header";
+import FormField from "../components/FormField";
+import FormButton from "../components/FormButton";
 import { useState } from "react";
 import { useActionState } from "react";
 import { daftar } from "@/app/actions/auth";
