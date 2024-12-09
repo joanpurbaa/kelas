@@ -59,10 +59,10 @@ model User {
 model Kelas {
   id            String  @id @default(cuid())
   userId        String
-  name          String
-  background    String
-  totalStudents Int
-  teacherName   String
+  name          String?
+  background    String?
+  totalStudents Int?
+  teacherName   String?
 
   user          User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

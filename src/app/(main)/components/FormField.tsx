@@ -3,12 +3,11 @@ import { Input } from "@/app/components/ui/input";
 type FormFieldProps = {
   id: string;
   label: string;
-  value: string;
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const FormField = ({ id, label, placeholder, value, onChange }: FormFieldProps) => {
+const FormField = ({ id, label, placeholder, onChange }: FormFieldProps) => {
   return (
     <>
       <label className="text-xs md:text-base" htmlFor={id}>
@@ -19,7 +18,6 @@ const FormField = ({ id, label, placeholder, value, onChange }: FormFieldProps) 
         onChange={onChange}
         id={id}
         name={id}
-        value={value}
         placeholder={placeholder}
         required
       />

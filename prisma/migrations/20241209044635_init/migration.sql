@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Kelas" ALTER COLUMN "name" DROP NOT NULL,
+ALTER COLUMN "background" DROP NOT NULL,
+ALTER COLUMN "totalStudents" DROP NOT NULL,
+ALTER COLUMN "teacherName" DROP NOT NULL;

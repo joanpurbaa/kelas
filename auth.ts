@@ -1,7 +1,6 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/app/lib/prisma";
-import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { FormMasukSchema } from "@/app/lib/zod";
 import { compareSync } from "bcrypt-ts";
@@ -46,17 +45,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        token.name = user.name;
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const protectedRoutes = ["/", "/dashboard"];
+
+      if (!isLoggedIn && protectedRoutes.includes(nextUrl.pathname)) {
+        return Response.redirect(new URL("/masuk", nextUrl));
+      } else if (isLoggedIn && nextUrl.pathname.startsWith("/masuk")) {
+        return Response.redirect(new URL("/", nextUrl));
       }
-      return token;
-    },
-    session({ session, token }) {
-      session.user.id = token.id;
-      session.user.name = token.name;
-      return session;
+      return true;
     },
   },
 });

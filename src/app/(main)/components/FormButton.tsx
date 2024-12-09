@@ -6,7 +6,7 @@ type FormButtonProps = {
 };
 
 const FormButton = ({ value }: FormButtonProps) => {
-  const { pending } = true;
+  const { pending } = useFormStatus();
 
   return (
     <Button

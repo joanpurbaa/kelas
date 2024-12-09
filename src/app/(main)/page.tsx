@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { SidebarProvider } from "@/app/components/ui/sidebar";
 import AppSidebar from "./components/AppSidebar";
@@ -8,7 +8,7 @@ import JoinOrCreateKelasButton from "./components/JoinOrCreateKelasButton";
 import CreateKelasModalBox from "./components/CreateKelasModalBox";
 import { useState } from "react";
 
-const Home = ({ children }: { children: React.ReactNode }) => {
+const Home = () => {
   const [buatKelas, setBuatKelas] = useState(false);
 
   const openModal = () => setBuatKelas(true);
@@ -22,7 +22,6 @@ const Home = ({ children }: { children: React.ReactNode }) => {
           <AppSidebar />
           <main className="w-full p-3">
             <JoinOrCreateKelasButton onClick={openModal} />
-            {children}
             <SubjectsMenu />
           </main>
         </SidebarProvider>

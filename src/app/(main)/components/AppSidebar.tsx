@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import {
   Settings,
   ChevronUp,
@@ -10,7 +9,6 @@ import {
   Book,
   User,
 } from "lucide-react";
-
 import {
   Sidebar,
   SidebarHeader,
@@ -25,7 +23,6 @@ import {
   SidebarMenuBadge,
   SidebarGroupContent,
 } from "@/app/components/ui/sidebar";
-
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -37,16 +34,10 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
-import { signOut, auth } from "../../../../auth";
-import { redirect } from "next/navigation";
+import { AppSidebarServerSide } from "../server/AppSidebarServerSide";
+import { SignOutServerSide } from "../server/SignOutServerSide";
 
 const AppSidebar = () => {
-  // const session = await auth();
-
-  // if (!session) {
-  //   redirect("/masuk");
-  // }
-
   return (
     <Sidebar>
       <SidebarHeader>
@@ -104,7 +95,7 @@ const AppSidebar = () => {
               <SidebarMenuButton>
                 <div className="flex items-center gap-x-1">
                   <UserCircle />
-                  {/* <p>{session?.user?.name}</p> */}
+                  <p><AppSidebarServerSide/></p>
                 </div>
                 <ChevronUp className="ml-auto" />
               </SidebarMenuButton>
@@ -118,9 +109,7 @@ const AppSidebar = () => {
                 <span>Akun</span>
               </DropdownMenuItem>
               <form
-                // action={async () => {
-                //   await signOut();
-                // }}
+                action={SignOutServerSide}
               >
                 <button type="submit">
                   <DropdownMenuItem>
